@@ -85,17 +85,41 @@
   consistency (TLS/IP), and risk logic that treats client signals as
   suggestions, not truth.
 
+## See it live — screenshot of the full payload
+
+![Verisoul — live capture: tokens · envelope · 195-field readable payload (full page)](screenshots/verisoul-full.png)
+
+*Full-page capture of `scripts/verisoul-visual.mjs` (visible-browser demo): the server-minted token preamble, the intercepted traffic, the recovered `dd` cipher model, and the complete readable payload (195 fields, original keys) with the bot-detection signals highlighted. Every run is a fresh sandbox session; all telemetry fulfilled locally.*
+
+## What the payload means (grouped)
+
+| Group | Fields tell you |
+|---|---|
+| **BOT DETECTION (`bot_*`)** | webdriver, CDP proxies, devtools-open, CefSharp/anti-detect extensions, spoofed constructors / to-string / create-element, nan probes, integrity codes, event counters, iframe tampering counts, focus/chrome visibility, URL-protocol quirks — i.e. *"is this an automated/embedded browser?"* |
+| **WORKER-REALM (`worker_*`)** | UA / webdriver / WebGL / UA-CH / timezone read from a **worker** — main-vs-worker inconsistencies are a signal themselves (`worker_webdriver:-888` = absent) |
+| **GPU / WEBGPU / HWID** | renderer/vendor (`SwiftShader` = headless tell), param/extension hashes, `hwid_ok` / `no-adapter` |
+| **FINGERPRINTS** | emoji icon-set hashes, font hits per-OS + detected list, CSS media/system-color/scrollbar probes, math/shaping/audio fingerprints, `timing_precision` |
+| **MEDIA / DRM** | video/audio capabilities, Widevine/PlayReady/ClearKey/FairPlay matrix, speech voices |
+| **SENSORS / ENV** | motion, battery, WebUSB/HID/serial/Bluetooth/NFC, SAB/COI, incognito |
+| **DEVICE / BROWSER** | UA-CH (arch/bitness/wow64/brands), platform, cores/memory, connection, locale/timezone/calendar, screen, touch |
+| **MISC** | `engine_detected`, `browser_id` (UUID), `collection_duration_ms` |
+
+**Full 195-field printout with captured values:** [`docs/PAYLOAD_PRINTOUT.md`](docs/PAYLOAD_PRINTOUT.md)
+
 ## Repo layout & quick run
 
 ```
 VERISOUL_WRITEUP_2026_10_25.md   the full writeup (cipher RE + payload schema)
-scripts/verisoul-decode-map.mjs  main instrumented run: decode map, stacks,
+docs/PAYLOAD_PRINTOUT.md          the complete 195-field payload, field-by-field
+scripts/verisoul-visual.mjs       HEADED demo (tokens + envelope + full payload)
+scripts/verisoul-decode-map.mjs   main instrumented run: decode map, stacks,
                                  original+renamed payload capture, dd decrypt
-scripts/verisoul-probe.mjs       network/probe capture (first pass)
-scripts/verisoul-q1t.mjs         offline string-table decoder dump
-scripts/verisoul-btoa.mjs        base64/JSON boundary capture
-scripts/verisoul_dd_decrypt.py   standalone dd decrypt (validated model)
-artifacts/                       verisoul-device-data.json (195 fields),
+scripts/verisoul-probe.mjs        network/probe capture (first pass)
+scripts/verisoul-q1t.mjs          offline string-table decoder dump
+scripts/verisoul-btoa.mjs         base64/JSON boundary capture
+scripts/verisoul_dd_decrypt.py    standalone dd decrypt (validated model)
+screenshots/                      verisoul-full.png, verisoul-view.png
+artifacts/                        device-data-capture.json (195 fields),
                                  decode-map-uniq.json (1281 strings),
                                  verisoul-strings.json (1755 offline),
                                  json-caps.json, collects-samerrun.json

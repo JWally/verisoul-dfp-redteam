@@ -6,7 +6,10 @@
   "description": "Verisoul Web SDK client-side drill-down (authorized, own-stack, public assets only, 2026-10-25)",
   "scripts": {
     "capture": "node scripts/verisoul-decode-map.mjs",
-    "decrypt": "python3 scripts/verisoul_dd_decrypt.py"
+    "decrypt": "python3 scripts/verisoul_dd_decrypt.py",
+    "visual": "node scripts/verisoul-visual.mjs"
   },
-  "dependencies": { "playwright": "^1" }
+  "dependencies": {
+    "playwright": "^1"
+  }
 }
