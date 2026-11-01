@@ -138,3 +138,16 @@ python3 scripts/verisoul_dd_decrypt.py artifacts/collects-samerrun.json
   customer/prod traffic, no keys. Per-build constant rotation means the
   bundled defaults in `verisoul_dd_decrypt.py` may need `--seed` from the
   matching bundle; the runtime capture path needs none.
+
+## Demo video — the full shipped payload
+
+`assets/videos/full-payload-demo.mp4` — a terminal-capture video of
+`scripts/demo-verisoul.py` printing the **complete decrypted device-data
+payload** (195 fields, `dd = b64(u[16] || E)`, key prepended in cleartext —
+no truncation). Reproduce it yourself:
+
+```bash
+python3 scripts/demo-verisoul.py artifacts/verisoul-device-data.json
+```
+
+The full decrypted JSON is also at `artifacts/verisoul-device-data.json`.
