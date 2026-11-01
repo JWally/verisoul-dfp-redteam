@@ -141,13 +141,19 @@ python3 scripts/verisoul_dd_decrypt.py artifacts/collects-samerrun.json
 
 ## Demo video — the full shipped payload
 
-`assets/videos/full-payload-demo.mp4` — a terminal-capture video of
-`scripts/demo-verisoul.py` printing the **complete decrypted device-data
-payload** (195 fields, `dd = b64(u[16] || E)`, key prepended in cleartext —
-no truncation). Reproduce it yourself:
+**Watch the capture** (terminal capture of `scripts/demo-verisoul.py` printing
+the complete decrypted device-data payload — 195 fields, `dd = b64(u[16] || E)`,
+key prepended in cleartext, no truncation):
+
+<img src="assets/videos/full-payload-demo.gif" width="720" alt="Verisoul full payload demo" />
+
+<video controls preload="metadata" width="720"><source src="assets/videos/full-payload-demo.mp4" type="video/mp4"></video>
+
+Reproduce it yourself:
 
 ```bash
 python3 scripts/demo-verisoul.py artifacts/verisoul-device-data.json
 ```
 
 The full decrypted JSON is also at `artifacts/verisoul-device-data.json`.
+[Download the mp4](https://raw.githubusercontent.com/JWally/dfp-redteam-verisoul/main/assets/videos/full-payload-demo.mp4)
