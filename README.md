@@ -155,5 +155,5 @@ Reproduce it yourself:
 python3 scripts/demo-verisoul.py artifacts/verisoul-device-data.json
 ```
 
-The full decrypted JSON is also at `artifacts/verisoul-device-data.json`.
+The full decrypted JSON is also at [verisoul-device-data.json](artifacts/verisoul-device-data.json).
 [Download the mp4](https://raw.githubusercontent.com/JWally/dfp-redteam-verisoul/main/assets/videos/full-payload-demo.mp4)
